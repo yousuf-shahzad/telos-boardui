@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en-GB" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta
+      name="description"
+      content="TELOS — a calmer workspace for ambitious studios. Explore projects, people, and the bigger picture."
+    />
+    <link rel="icon" type="image/svg+xml" href="/telos.svg" />
+    <script>
+      try {
+        if (localStorage.getItem("boardui:theme") === "dark")
+          document.documentElement.classList.add("dark");
+      } catch {}
+    </script>
+    <title>TELOS — Work with purpose</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/main.tsx"></script>
+  </body>
+</html>
