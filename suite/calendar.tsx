@@ -290,7 +290,7 @@ export function StudioCalendar({
                         ))}
                         {events.length > 2 && view !== "week" && (
                           <button
-                            className="text-caption-1-medium text-accent-600"
+                            className="text-caption-1-medium text-text-accent"
                             onClick={() => setSelected(iso)}
                           >
                             +{events.length - 2} more
@@ -318,7 +318,7 @@ export function StudioCalendar({
         </section>
         <aside className="suite-card day-panel">
           <div className="flex justify-between items-center">
-            <RiCalendarLine className="size-6 text-accent-600" />
+            <RiCalendarLine className="size-6 text-text-accent" />
             <Button
               leadingIcon={RiAddLine}
               iconOnly
@@ -350,7 +350,7 @@ export function StudioCalendar({
                   {e.done ? (
                     <RiCheckboxCircleLine className="size-5 text-status-lime-text" />
                   ) : (
-                    <RiFlagLine className="size-5 text-accent-600" />
+                    <RiFlagLine className="size-5 text-text-accent" />
                   )}
                   <span>
                     <span className="text-body-medium">{e.name}</span>

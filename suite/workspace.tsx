@@ -397,7 +397,7 @@ export function Workspace({
             <span className="text-body-medium text-text-primary">
               {preferences.name}
             </span>
-            <Chip variant="caption" color="blue">
+            <Chip variant="caption" color="orange">
               Local demo
             </Chip>
           </div>
@@ -410,7 +410,7 @@ export function Workspace({
               onOpen={open}
               notify={notify}
             />
-            <Avatar initials="AL" color="blue" />
+            <Avatar initials="AL" color="orange" />
           </div>
         </header>
         <main id="main" tabIndex={-1} className="dashboard-body">
@@ -464,7 +464,7 @@ export function Workspace({
                 <section className="focus-card">
                   <div className="flex items-center justify-between">
                     <h2 className="text-headline-medium">A little focus</h2>
-                    <RiFocus3Line className="size-5 text-accent-600" />
+                    <RiFocus3Line className="size-5 text-text-accent" />
                   </div>
                   <p className="text-body-regular text-text-secondary">
                     The next conversations worth having.
@@ -593,14 +593,14 @@ export function Workspace({
           {view === "team" && (
             <>
               <div className="team-banner">
-                <RiGroupLine className="size-10 text-accent-600" />
+                <RiGroupLine className="size-10 text-text-accent" />
                 <div>
                   <h2 className="text-title-2-medium">{preferences.name}</h2>
                   <p className="text-body-regular text-text-secondary">
                     Different talents. One shared direction.
                   </p>
                 </div>
-                <Chip color="blue">4 demo members</Chip>
+                <Chip color="orange">4 demo members</Chip>
               </div>
               <div className="team-grid">
                 {people.map((person) => (

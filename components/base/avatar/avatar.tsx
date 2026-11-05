@@ -21,7 +21,7 @@ import { cx, sortCx } from "@/utils/cx";
  */
 
 type AvatarSize = "xs" | "sm" | "md" | "lg";
-type AvatarColor = "neutral" | "blue" | "lime" | "pink";
+type AvatarColor = "neutral" | "blue" | "orange" | "lime" | "pink";
 
 export interface AvatarProps extends HTMLAttributes<HTMLSpanElement> {
   size?: AvatarSize;
@@ -45,6 +45,7 @@ const styles = sortCx({
   color: {
     neutral: "bg-avatar-neutral-background text-text-secondary",
     blue: "bg-blue-300 text-blue-900",
+    orange: "bg-accent-300 text-accent-950",
     lime: "bg-lime-200 text-lime-700",
     pink: "bg-pink-200 text-pink-500",
   },

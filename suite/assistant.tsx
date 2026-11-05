@@ -329,7 +329,7 @@ export function StudioAssistant({
           </button>
         ))}
         <div className="assistant-local-note">
-          <RiSparklingLine className="size-6 text-accent-600" />
+          <RiSparklingLine className="size-6 text-text-accent" />
           <span className="text-body-medium">
             Studio mode, no strings attached.
           </span>
@@ -389,7 +389,7 @@ export function StudioAssistant({
           </div>
           {thread.messages.length === 0 && (
             <div className="assistant-empty">
-              <RiSparklingLine className="size-10 text-accent-600" />
+              <RiSparklingLine className="size-10 text-text-accent" />
               <h3 className="text-title-1-medium">
                 What could use a little clarity?
               </h3>
@@ -523,7 +523,7 @@ export function StudioAssistant({
                       {a.url ? (
                         <img src={a.url} alt={`Preview of ${a.name}`} />
                       ) : (
-                        <RiFileTextLine className="size-5 text-accent-600" />
+                        <RiFileTextLine className="size-5 text-text-accent" />
                       )}
                       <span className="text-caption-1-medium">
                         {a.name}

@@ -5,7 +5,6 @@ import {
   RiArrowRightLine,
   RiArrowRightUpLine,
   RiAddLine,
-  RiLayoutGridLine,
   RiFolder3Line,
   RiBarChartBoxLine,
   RiGroupLine,
@@ -51,6 +50,7 @@ import {
   Accordion,
   AccordionItem,
 } from "@/components/base/accordion/accordion";
+import { Tabs, TabList, Tab, TabPanel } from "@/components/base/tabs/tabs";
 import { DirectionProvider } from "@/components/foundations/direction/direction";
 import { cx } from "@/utils/cx";
 import "@/styles/globals.css";
@@ -77,6 +77,83 @@ function Logo({ small = false }: { small?: boolean }) {
         TELOS<span className="logo-period">.</span>
       </span>
     </a>
+  );
+}
+function BrutalLink({ href, children }: { href: string; children: ReactNode }) {
+  return (
+    <ButtonLink
+      href={href}
+      variant="secondary"
+      trailingIcon={RiArrowRightLine}
+      className="brutal-btn"
+    >
+      {children}
+    </ButtonLink>
+  );
+}
+function ProjectTicker() {
+  return (
+    <div className="ticker">
+      <div className="ticker-track">
+        {[false, true].map((copy) => (
+          <ul key={String(copy)} aria-hidden={copy || undefined}>
+            {initialProjects.map((p) => (
+              <li key={p.id}>
+                <a href="#/dashboard/projects" tabIndex={copy ? -1 : undefined}>
+                  <span className="ticker-block">{p.progress}%</span>
+                  <span className="ticker-text">
+                    <strong>{p.client}</strong>
+                    <span>{p.name}</span>
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        ))}
+      </div>
+    </div>
+  );
+}
+const MODULES = [
+  {
+    id: "board",
+    label: "Board",
+    path: "/dashboard/board",
+    text: "Move work from first spark to final handoff.",
+  },
+  {
+    id: "calendar",
+    label: "Calendar",
+    path: "/dashboard/calendar",
+    text: "See deadlines and milestones in one place.",
+  },
+  {
+    id: "insights",
+    label: "Insights",
+    path: "/dashboard/insights",
+    text: "Read revenue and delivery at a glance.",
+  },
+];
+function ModuleBox() {
+  return (
+    <Tabs className="module-box" defaultSelectedKey="board">
+      <TabList aria-label="Workspace areas">
+        {MODULES.map((item) => (
+          <Tab key={item.id} id={item.id}>
+            {item.label}
+          </Tab>
+        ))}
+      </TabList>
+      {MODULES.map((item) => (
+        <TabPanel key={item.id} id={item.id}>
+          <a href={`#${item.path}`}>
+            <span dir="ltr">open {item.path}</span>
+            <RiArrowRightUpLine className="size-4" aria-hidden />
+          </a>
+          <p>{item.text}</p>
+        </TabPanel>
+      ))}
+    </Tabs>
   );
 }
 function SectionLabel({ children }: { children: ReactNode }) {
@@ -134,7 +211,14 @@ function App() {
         <>
           <header className="site-header">
             <div className="container header-inner">
-              <Logo />
+              <div className="masthead">
+                <a href="#/" aria-label="TELOS home">
+                  TELOS
+                  <br />
+                  STUDIO
+                </a>
+                <ThemeToggle collapsed />
+              </div>
               <nav
                 className={cx("site-nav", menu && "is-open")}
                 aria-label="Main navigation"
@@ -154,16 +238,12 @@ function App() {
                 ))}
               </nav>
               <div className="header-actions">
-                <ThemeToggle collapsed />
                 <ButtonLink
                   href="#/dashboard"
                   variant="secondary"
-                  className="desktop-login"
+                  className="desktop-login header-button"
                 >
-                  Explore demo
-                </ButtonLink>
-                <ButtonLink href="#/dashboard" trailingIcon={RiArrowRightLine}>
-                  Get started
+                  Open demo
                 </ButtonLink>
                 <Button
                   className="mobile-menu"
@@ -177,7 +257,7 @@ function App() {
               </div>
             </div>
           </header>
-          <main id="main" tabIndex={-1}>
+          <main id="main" className="marketing" tabIndex={-1}>
             {route === "/" ? (
               <Home />
             ) : route === "/about" ? (
@@ -185,13 +265,15 @@ function App() {
             ) : route === "/pricing" ? (
               <Pricing notify={setToast} />
             ) : (
-              <div className="container page-hero">
-                <SectionLabel>LOST IN SPACE?</SectionLabel>
-                <h1 className="text-display-2-medium">
-                  Let’s get you back on track.
-                </h1>
-                <ButtonLink href="#/">Back to home</ButtonLink>
-              </div>
+              <section className="brand-band">
+                <div className="container page-hero">
+                  <SectionLabel>LOST IN SPACE?</SectionLabel>
+                  <h1 className="text-large-title-medium">
+                    Let’s get you back on track.
+                  </h1>
+                  <BrutalLink href="#/">Back to home</BrutalLink>
+                </div>
+              </section>
             )}
           </main>
           <Footer />
@@ -217,61 +299,62 @@ function App() {
 function Home() {
   return (
     <>
-      <section className="hero container">
-        <div className="hero-copy">
-          <a href="#/dashboard" className="announcement">
-            <Chip color="blue" variant="caption">
-              Meet TELOS
-            </Chip>
-            <span className="text-caption-1-medium text-text-secondary">
-              A little clarity. A lot of possibility.
-            </span>
-            <RiArrowRightLine className="size-4 text-foreground-icon-secondary" />
-          </a>
-          <h1 className="text-large-title-medium">
-            Less busywork.
-            <br />
-            <span className="text-accent-600">More purpose.</span>
+      <section className="type-hero">
+        <div className="container type-hero-main">
+          <h1 className="type-wordmark" aria-label="TELOS">
+            telos
+            <span aria-hidden>τ</span>
           </h1>
-          <p className="text-title-3-regular text-text-secondary">
-            A calmer workspace for ambitious studios.
-            <br className="desktop-break" /> Bring your projects, people, and
-            bigger picture together.
+          <p className="type-lede">
+            A calmer workspace for ambitious studios that keeps your
+            <br className="type-break" /> projects, people, and bigger picture
+            together.
           </p>
-          <div className="hero-buttons">
-            <ButtonLink
-              href="#/dashboard"
-              trailingIcon={RiArrowRightLine}
-              className="cta"
-            >
-              Find your focus
-            </ButtonLink>
-            <ButtonLink
-              href="#/dashboard"
-              variant="secondary"
-              leadingIcon={RiLayoutGridLine}
-              className="cta"
-            >
-              Explore the demo
-            </ButtonLink>
-          </div>
-          <div className="hero-footnote text-caption-1-regular text-text-tertiary">
-            <span className="tiny-check">
-              <RiCheckLine className="size-4" />
-              No credit card
-            </span>
-            <span className="tiny-check">
-              <RiCheckLine className="size-4" />
-              Your work, in one place
-            </span>
+          <p className="type-hand">[less busywork. more purpose.]</p>
+        </div>
+        <ProjectTicker />
+      </section>
+      <section className="band-ink">
+        <div className="container statement">
+          <h2>
+            Less Busywork.
+            <br />
+            More Purpose.
+          </h2>
+          <div className="statement-side">
+            <div className="statement-actions">
+              <BrutalLink href="#/dashboard">Find your focus</BrutalLink>
+              <ButtonLink
+                href="#/about"
+                variant="secondary"
+                className="brutal-btn brutal-btn-quiet"
+              >
+                Read the idea
+              </ButtonLink>
+            </div>
+            <span className="statement-label">Step into the workspace</span>
+            <ModuleBox />
           </div>
         </div>
-        <div className="orbit-decoration" aria-hidden>
-          <span />
-          <span />
-          <span />
-          <div className="orbit-core">
-            <RiFocus3Line />
+      </section>
+      <section className="band-volt">
+        <div className="container made-for">
+          <p className="text-caption-1-medium">
+            MADE FOR THE WAY SMALL TEAMS WORK
+          </p>
+          <div className="studio-types text-title-2-medium">
+            <span>
+              <RiCompass3Line />
+              Independent studios
+            </span>
+            <span>
+              <RiGlobalLine />
+              Distributed teams
+            </span>
+            <span>
+              <RiFlashlightLine />
+              Big-picture thinkers
+            </span>
           </div>
         </div>
       </section>
@@ -289,28 +372,9 @@ function Home() {
         <MiniDashboard />
         <div className="preview-bottom text-caption-1-regular text-text-tertiary">
           <span>Fictional studio. Real possibilities.</span>
-          <a href="#/dashboard" className="text-accent-600">
+          <a href="#/dashboard" className="text-text-accent">
             Open full workspace <RiArrowRightUpLine className="size-4" />
           </a>
-        </div>
-      </section>
-      <section className="container made-for">
-        <p className="text-caption-1-medium text-text-tertiary">
-          MADE FOR THE WAY SMALL TEAMS WORK
-        </p>
-        <div className="studio-types text-title-2-medium text-text-secondary">
-          <span>
-            <RiCompass3Line />
-            Independent studios
-          </span>
-          <span>
-            <RiGlobalLine />
-            Distributed teams
-          </span>
-          <span>
-            <RiFlashlightLine />
-            Big-picture thinkers
-          </span>
         </div>
       </section>
       <section className="container features-section">
@@ -335,14 +399,14 @@ function Home() {
               <div className="mini-project">
                 <div className="flex justify-between">
                   <span className="text-body-medium">Forma brand refresh</span>
-                  <Chip color="blue" variant="caption">
+                  <Chip color="orange" variant="caption">
                     In progress
                   </Chip>
                 </div>
                 <ProgressBar aria-label="Forma progress" value={68} />
                 <div className="flex items-center justify-between text-caption-1-regular text-text-tertiary">
                   <span>One shared direction</span>
-                  <Avatar initials="AL" color="blue" size="sm" />
+                  <Avatar initials="AL" color="orange" size="sm" />
                 </div>
               </div>
               <div className="mini-project offset">
@@ -365,7 +429,7 @@ function Home() {
           <article className="feature-card">
             <div className="feature-visual team-visual">
               <div className="avatar-orbit">
-                <Avatar initials="AL" color="blue" size="lg" />
+                <Avatar initials="AL" color="orange" size="lg" />
                 <Avatar initials="JK" color="lime" size="lg" />
                 <span className="orbit-logo">
                   <RiFocus3Line />
@@ -407,24 +471,20 @@ function Home() {
           </article>
         </div>
       </section>
-      <section className="container philosophy-strip">
-        <span className="philosophy-symbol" aria-hidden>
-          τ
-        </span>
-        <div>
-          <SectionLabel>A NAME WITH INTENTION</SectionLabel>
-          <h2 className="text-title-1-medium">
-            TELOS means purpose.
-            <br />
-            We think your workspace should have one.
-          </h2>
-          <ButtonLink
-            href="#/about"
-            variant="secondary"
-            trailingIcon={RiArrowRightLine}
-          >
-            A little about us
-          </ButtonLink>
+      <section className="band-ink">
+        <div className="container philosophy-strip">
+          <span className="philosophy-symbol" aria-hidden>
+            τ
+          </span>
+          <div>
+            <SectionLabel>A NAME WITH INTENTION</SectionLabel>
+            <h2 className="text-title-1-medium">
+              TELOS means purpose.
+              <br />
+              We think your workspace should have one.
+            </h2>
+            <BrutalLink href="#/about">A little about us</BrutalLink>
+          </div>
         </div>
       </section>
       <CTA />
@@ -437,7 +497,7 @@ function MiniDashboard() {
       <aside className="mini-sidebar">
         <Logo small />
         <div className="mini-workspace text-body-medium">
-          <Avatar initials="N" color="blue" size="sm" />
+          <Avatar initials="N" color="orange" size="sm" />
           Northstar Studio<span className="text-text-tertiary">⌄</span>
         </div>
         <nav aria-label="Preview navigation">
@@ -459,7 +519,7 @@ function MiniDashboard() {
         <div className="mini-sidebar-bottom text-caption-1-regular text-text-tertiary">
           A space for good work.
           <br />
-          <span className="text-accent-600">Studio demo</span>
+          <span className="text-text-accent">Studio demo</span>
         </div>
       </aside>
       <div className="mini-content">
@@ -539,21 +599,14 @@ function CTA() {
   return (
     <section className="container">
       <div className="cta-panel">
-        <RiFocus3Line className="size-10 text-accent-600" />
         <h2 className="text-display-3-medium">
           Make space for your best work.
         </h2>
-        <p className="text-headline-regular text-text-secondary">
+        <p className="text-body-medium">
           A fresh perspective is just one click away.
         </p>
-        <ButtonLink
-          href="#/dashboard"
-          trailingIcon={RiArrowRightLine}
-          className="cta"
-        >
-          Step inside TELOS
-        </ButtonLink>
-        <span className="text-caption-1-regular text-text-tertiary">
+        <BrutalLink href="#/dashboard">Step inside TELOS</BrutalLink>
+        <span className="text-caption-1-regular">
           An interactive demo. No sign-up needed.
         </span>
       </div>
@@ -563,17 +616,19 @@ function CTA() {
 function About() {
   return (
     <>
-      <section className="container page-hero about-hero">
-        <SectionLabel>THE IDEA BEHIND TELOS</SectionLabel>
-        <h1 className="text-large-title-medium">
-          Good work starts
-          <br />
-          with a <span className="text-accent-600">clear purpose.</span>
-        </h1>
-        <p className="text-title-3-regular text-text-secondary">
-          A little less noise. A little more intention.
-          <br />A workspace that gives your team room to think.
-        </p>
+      <section className="brand-band">
+        <div className="container page-hero about-hero">
+          <SectionLabel>THE IDEA BEHIND TELOS</SectionLabel>
+          <h1 className="text-large-title-medium">
+            Good work starts
+            <br />
+            with a clear purpose.
+          </h1>
+          <p className="text-body-medium">
+            A little less noise. A little more intention.
+            <br />A workspace that gives your team room to think.
+          </p>
+        </div>
       </section>
       <section className="container about-story">
         <div className="about-art" aria-hidden>
@@ -634,7 +689,7 @@ function About() {
               <span className="value-number text-caption-1-medium">
                 0{i + 1}
               </span>
-              <Icon className="size-7 text-accent-600" />
+              <Icon className="size-7 text-text-accent" />
               <h3 className="text-title-2-medium">{title}</h3>
               <p className="text-headline-regular text-text-secondary">
                 {text}
@@ -651,32 +706,33 @@ function Pricing({ notify }: { notify: (message: string) => void }) {
   const [annual, setAnnual] = useState(true);
   return (
     <>
-      <section className="container page-hero pricing-hero">
-        <SectionLabel>SIMPLE PLANS. ROOM TO GROW.</SectionLabel>
-        <h1 className="text-large-title-medium">
-          A little investment.
-          <br />
-          <span className="text-accent-600">A lot more focus.</span>
-        </h1>
-        <p className="text-title-3-regular text-text-secondary">
-          Start small. Find your flow. Grow at your own pace.
-        </p>
-        <div className="billing-switch">
-          <SegmentedControl
-            aria-label="Billing interval"
-            selectedKeys={[annual ? "annual" : "monthly"]}
-            onSelectionChange={(keys) => setAnnual(keys.has("annual"))}
-          >
-            <SegmentedControlItem id="monthly">Monthly</SegmentedControlItem>
-            <SegmentedControlItem id="annual">Yearly</SegmentedControlItem>
-          </SegmentedControl>
-          <Chip color="lime" variant="caption">
-            Save 20% yearly
-          </Chip>
+      <section className="brand-band">
+        <div className="container page-hero pricing-hero">
+          <SectionLabel>SIMPLE PLANS. ROOM TO GROW.</SectionLabel>
+          <h1 className="text-large-title-medium">
+            A little investment.
+            <br />A lot more focus.
+          </h1>
+          <p className="text-body-medium">
+            Start small. Find your flow. Grow at your own pace.
+          </p>
+          <div className="billing-switch">
+            <SegmentedControl
+              aria-label="Billing interval"
+              selectedKeys={[annual ? "annual" : "monthly"]}
+              onSelectionChange={(keys) => setAnnual(keys.has("annual"))}
+            >
+              <SegmentedControlItem id="monthly">Monthly</SegmentedControlItem>
+              <SegmentedControlItem id="annual">Yearly</SegmentedControlItem>
+            </SegmentedControl>
+            <Chip color="lime" variant="caption">
+              Save 20% yearly
+            </Chip>
+          </div>
+          <p className="text-caption-1-regular">
+            Illustrative plans for this demo. No payments or subscriptions.
+          </p>
         </div>
-        <p className="text-caption-1-regular text-text-tertiary">
-          Illustrative plans for this demo. No payments or subscriptions.
-        </p>
       </section>
       <section className="container pricing-grid">
         {[
@@ -727,7 +783,7 @@ function Pricing({ notify }: { notify: (message: string) => void }) {
             <div className="flex justify-between items-center">
               <h2 className="text-title-2-medium">{plan.name}</h2>
               {plan.featured && (
-                <Chip color="blue" variant="caption">
+                <Chip color="orange" variant="caption">
                   A good place to start
                 </Chip>
               )}
@@ -765,7 +821,7 @@ function Pricing({ notify }: { notify: (message: string) => void }) {
             <ul>
               {plan.features.map((f) => (
                 <li key={f}>
-                  <RiCheckLine className="size-4 text-accent-600" />
+                  <RiCheckLine className="size-4 text-text-accent" />
                   {f}
                 </li>
               ))}
@@ -816,28 +872,30 @@ function Pricing({ notify }: { notify: (message: string) => void }) {
 }
 function Footer() {
   return (
-    <footer className="site-footer container">
-      <div className="footer-top">
-        <div>
-          <Logo />
-          <p className="text-body-regular text-text-secondary">
-            Good work. Clear purpose.
-          </p>
+    <footer className="band-ink">
+      <div className="site-footer container">
+        <div className="footer-top">
+          <div>
+            <a href="#/" className="footer-wordmark" aria-label="TELOS home">
+              telos
+            </a>
+            <p className="text-body-regular">Good work. Clear purpose.</p>
+          </div>
+          <div className="footer-links">
+            <a href="#/">Product</a>
+            <a href="#/about">About</a>
+            <a href="#/pricing">Pricing</a>
+            <a href="#/dashboard">Explore workspace ↗</a>
+          </div>
         </div>
-        <div className="footer-links">
-          <a href="#/">Product</a>
-          <a href="#/about">About</a>
-          <a href="#/pricing">Pricing</a>
-          <a href="#/dashboard">Explore workspace ↗</a>
+        <div className="footer-bottom text-caption-1-regular">
+          <span>
+            © {new Date().getFullYear()} TELOS. A fictional studio workspace.
+          </span>
+          <a href="https://www.boardui.com" target="_blank" rel="noreferrer">
+            Built with Board UI ↗
+          </a>
         </div>
-      </div>
-      <div className="footer-bottom text-caption-1-regular text-text-tertiary">
-        <span>
-          © {new Date().getFullYear()} TELOS. A fictional studio workspace.
-        </span>
-        <a href="https://www.boardui.com" target="_blank" rel="noreferrer">
-          Built with Board UI ↗
-        </a>
       </div>
     </footer>
   );

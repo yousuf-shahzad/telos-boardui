@@ -270,7 +270,7 @@ export function ProjectEditor({
             {draft.comments?.length ? (
               draft.comments.map((c) => (
                 <div key={c.id} className="project-comment">
-                  <Avatar initials="AL" size="sm" color="blue" />
+                  <Avatar initials="AL" size="sm" color="orange" />
                   <div>
                     <span className="text-caption-1-medium text-text-primary">
                       Alex Lane · {new Date(c.date).toLocaleDateString("en-GB")}
@@ -363,7 +363,7 @@ export function ProjectBoard({
     <>
       <div className="suite-toolbar">
         <div className="flex items-center gap-3">
-          <Chip color="blue">{shown.length} projects</Chip>
+          <Chip color="orange">{shown.length} projects</Chip>
           <span className="text-body-regular text-text-secondary">
             A shared view of what’s next.
           </span>

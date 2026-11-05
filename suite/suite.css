@@ -126,7 +126,7 @@
 .overview-shortcuts > a > svg:first-child {
   width: 28px;
   height: 28px;
-  color: var(--color-accent-600);
+  color: var(--color-text-accent);
   flex-shrink: 0;
 }
 .overview-shortcuts > a > span {
@@ -213,7 +213,7 @@
   line-height: 1.5;
 }
 .kanban-title:hover {
-  color: var(--color-accent-600);
+  color: var(--color-text-accent);
 }
 .kanban-meta {
   display: flex;
@@ -280,7 +280,7 @@
   overflow-wrap: anywhere;
 }
 .table-project-button:hover {
-  color: var(--color-accent-600);
+  color: var(--color-text-accent);
 }
 .table-pagination {
   display: flex;
@@ -408,7 +408,7 @@
 }
 .calendar-event:hover {
   background: var(--color-background-secondary-hover);
-  color: var(--color-accent-600);
+  color: var(--color-text-accent);
 }
 .event-dot {
   display: inline-block;
@@ -472,7 +472,7 @@
   flex-shrink: 0;
 }
 .day-event:hover {
-  color: var(--color-accent-600);
+  color: var(--color-text-accent);
 }
 .day-panel > p:last-child {
   line-height: 1.8;
@@ -499,10 +499,10 @@
 }
 .agenda-date {
   min-width: 56px;
-  color: var(--color-accent-600);
+  color: var(--color-text-accent);
 }
 .agenda-item:hover {
-  color: var(--color-accent-600);
+  color: var(--color-text-accent);
 }
 .insights-grid {
   display: grid;
@@ -733,7 +733,7 @@
   height: 40px;
   display: grid;
   place-items: center;
-  color: var(--color-accent-600);
+  color: var(--color-text-accent);
   background: var(--color-background-primary-default);
   border: 1px solid var(--color-separator-border);
   border-radius: 12px;
@@ -1160,7 +1160,7 @@
     display: block;
     text-align: center;
     font-size: 8px;
-    color: var(--color-accent-600);
+    color: var(--color-text-accent);
   }
   .calendar-key {
     padding: 14px 16px;

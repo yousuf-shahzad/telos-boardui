@@ -144,7 +144,7 @@ export function StudioInsights({
               </span>
               <h3 className="text-title-2-medium">Project pipeline</h3>
             </div>
-            <RiBarChartBoxLine className="size-6 text-accent-600" />
+            <RiBarChartBoxLine className="size-6 text-text-accent" />
           </div>
           <div className="stage-chart">
             {STAGES.map((stage) => {
@@ -200,7 +200,7 @@ export function StudioInsights({
             </span>
             <h3 className="text-title-2-medium">Team workload</h3>
           </div>
-          <Chip variant="caption" color="blue">
+          <Chip variant="caption" color="orange">
             Based on project deadlines
           </Chip>
         </div>

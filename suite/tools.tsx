@@ -256,7 +256,7 @@ export function WorkspaceSettings({
             <h2 className="text-headline-medium">
               Your workspace, on your device.
             </h2>
-            <Chip color="blue" variant="caption">
+            <Chip color="orange" variant="caption">
               Local only
             </Chip>
           </div>
